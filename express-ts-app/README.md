@@ -22,4 +22,3 @@ curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 # 4. Verify Installation
     node -v
     npm -v
-
