@@ -1,14 +1,14 @@
 {
   "name": "express-ts-app",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "dev:nodemon": "nodemon --watch dist dist/index.js",
-    "dev:nodemon:ts": "nodemon --watch src --ext ts --exec ts-node src/index.ts"
+    "start": "node dist/app.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "dev:nodemon": "nodemon --watch dist dist/app.js",
+    "dev:nodemon:ts": "nodemon --watch src --ext ts --exec ts-node src/app.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,10 +16,12 @@
   "description": "",
   "dependencies": {
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/lodash": "^4.17.20",
     "@types/node": "^24.0.13",
     "nodemon": "^3.1.10",
