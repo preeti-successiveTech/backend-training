@@ -15,7 +15,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/geoip-lite": "^1.4.4",
     "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "geoip-lite": "^1.4.10",
+    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21"
   },

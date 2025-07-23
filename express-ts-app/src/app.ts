@@ -10,8 +10,10 @@ import { errorHandler } from './middleware/errorHandler';
 import { logger, checkAuth, addTimestamp } from './middleware/multiMiddleware'
 import { addCustomHeader } from './middleware/addCustomHeader';
 import { simpleRateLimiter } from './middleware/simpleRateLimiter';
-
-
+import userAuthValidate from "./router/userAuthValidate";
+import numericRoute from "./router/numericRoute";
+import dynamicRoute from "./router/dynamicRoute";
+import userLocationRoute from "./router/userLocationRoute";
 const app = express();
 const PORT = 3000;
 
@@ -22,7 +24,11 @@ app.use(requestLogger);
 app.use('/mockUsers', mockUserRoutes);
 app.use('/data',postSeededData);
 app.use('/auth', useAuthRouter);
-app.use('/middlewareApi', AuthMiddlewareWithApi)
+app.use('/middlewareApi', AuthMiddlewareWithApi);
+app.use('/',userAuthValidate);
+app.use('/',numericRoute);
+app.use('/dynamic',dynamicRoute);
+app.use('/allowedCounteries',userLocationRoute);
 
 
 app.get('/', (req: Request, res: Response) => {
