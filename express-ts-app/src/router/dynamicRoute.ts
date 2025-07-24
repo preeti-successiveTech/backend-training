@@ -1,13 +1,14 @@
 import express from 'express';
-import { dynamicValidation } from '../middleware/dynamicValidation';
+import { DynamicValidationMiddleware } from '../middleware/DynamicValidationMiddleware';
 
 const router = express.Router();
+const dynamicValidation = new DynamicValidationMiddleware();
 
-router.post('/register', dynamicValidation(), (req, res) => {
+router.post('/register', dynamicValidation.handle(), (req, res) => {
   res.json({ success: true, data: req.body });
 });
 
-router.post('/login', dynamicValidation(), (req, res) => {
+router.post('/login', dynamicValidation.handle(), (req, res) => {
   res.json({ success: true, data: req.body });
 });
 

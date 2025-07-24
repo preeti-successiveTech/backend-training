@@ -1,12 +1,14 @@
 import express from 'express';
-import { validateRegistration } from '../middleware/validateRegistration';
+import { ValidateRegistration } from '../middleware/ValidateRegistration';
 
 const router = express.Router();
 
-router.post('/register', validateRegistration, (req, res) => {
+const validateRegistration = new ValidateRegistration();
+
+router.post('/register', validateRegistration.handle(), (req, res) => {
   res.status(200).json({
     message: '✅ Registration successful!',
-    user: req.body
+    user: req.body,
   });
 });
 
