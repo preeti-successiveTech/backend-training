@@ -64,3 +64,20 @@ bash
 function square(x: number) {
   return x * x; // return type is inferred as number
 }
+
+# Classes in Typescript
+They are the blueprint for creating objects, encapsulating both data (properties) and behavior (methods) into a single, organized unit.
+Key aspects of classes : 
+ They can have type annotations to ensure type safety.
+ These define the actions or functions that an object can perform.
+ Access modifiers : public(Accessible from anywhere), private(Accessible only within the class where they are declared), protected(Accessible within the class and its subclasses)
+### Inheritance : 
+Classes can extend other classes using the extends keyword, allowing them to inherit properties and methods from a parent class.
+ ### Abstraction : 
+They can contain abstract methods (methods without implementation) that must be implemented by concrete subclasses.
+
+# Interfaces in Typescript 
+They serve as powerful contracts that define the shape and structure of objects within your code.
+Are a fundamental tool for ensuring type safety and building robust applications by specifying what properties and methods an object should have, along with their respective types. 
+This ensures consistency and helps prevent errors during development.
+Interfaces solely focus on the contract and structure of objects; they do not contain any implementation logic, initialization values, or actual function code.
