@@ -4,11 +4,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const GenerateMockdata_1 = require("../utils/GenerateMockdata");
+const ValidateRegistration_1 = require("../middleware/ValidateRegistration");
 const router = express_1.default.Router();
-const generator = new GenerateMockdata_1.GenerateMockdata();
-const mockUsers = generator.generateUsers(10);
-router.get('/', (req, res) => {
-    res.json(mockUsers);
+const validateRegistration = new ValidateRegistration_1.ValidateRegistration();
+router.post('/register', validateRegistration.handle(), (req, res) => {
+    res.status(200).json({
+        message: '✅ Registration successful!',
+        user: req.body,
+    });
 });
 exports.default = router;

@@ -20,6 +20,9 @@ import testError from "./router/testError";
 import asyncErrorRoute from "./router/asyncRoute";
 import parameterRequest from "./router/parameterRequest";
 
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 const PORT = 3000;
