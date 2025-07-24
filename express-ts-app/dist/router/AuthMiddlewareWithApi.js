@@ -6,36 +6,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const GenerateMockdata_1 = require("../utils/GenerateMockdata");
-const auth_1 = require("../middleware/auth");
+const AuthenticateTokenMiddleware_1 = require("../middleware/AuthenticateTokenMiddleware");
 const router = express_1.default.Router();
-const SECRET_KEY = auth_1.secretkey;
-// it will check the login creaditional 
+const SECRET_KEY = 'Preeti';
+const mockDataGenerator = new GenerateMockdata_1.GenerateMockdata();
+const mockUsers = mockDataGenerator.generateUsers(5);
+const authenticateTokenMiddleware = new AuthenticateTokenMiddleware_1.AuthenticateTokenMiddleware(SECRET_KEY);
 router.post('/login', (req, res) => {
-    const username = req.body;
+    const { username } = req.body;
     if (!username) {
         return res.status(400).json({ message: 'Username is required' });
     }
-    const user = { name: username }; // create a payload
-    const token = jsonwebtoken_1.default.sign(user, SECRET_KEY, { expiresIn: '1h' }); // create a token
+    const user = { name: username };
+    const token = jsonwebtoken_1.default.sign(user, SECRET_KEY, { expiresIn: '1h' });
     res.json({ token });
 });
-// check the token 
-router.post('/authenticate', auth_1.authenticateToken, (req, res) => {
-    const receivedData = req.body; // data, I want to add in my mockdata
+router.post('/authenticate', authenticateTokenMiddleware.handle(), (req, res) => {
+    const receivedData = req.body;
     if (!receivedData || !receivedData.name) {
         return res.status(400).json({ message: 'Invalid user data' });
     }
-    GenerateMockdata_1.mockUsers.push(receivedData);
+    mockUsers.push(receivedData);
     console.log('User added:', receivedData);
     res.json({
         message: '✅ User data received and added successfully',
         data: receivedData,
     });
 });
-router.get('/protectedData', (req, res) => {
+router.get('/protectedData', authenticateTokenMiddleware.handle(), (req, res) => {
     res.json({
         message: '✅ You have accessed a protected route!',
-        data: GenerateMockdata_1.mockUsers,
+        data: mockUsers,
         user: req.user,
     });
 });

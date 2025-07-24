@@ -4,11 +4,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const GenerateMockdata_1 = require("../utils/GenerateMockdata");
+const http_errors_1 = __importDefault(require("http-errors"));
 const router = express_1.default.Router();
-const generator = new GenerateMockdata_1.GenerateMockdata();
-const mockUsers = generator.generateUsers(10);
-router.get('/', (req, res) => {
-    res.json(mockUsers);
+router.get("/", async (req, res, next) => {
+    try {
+        await Promise.reject((0, http_errors_1.default)(500, "Intentional async error occurred!"));
+        res.send("Success");
+    }
+    catch (error) {
+        next(error);
+    }
 });
 exports.default = router;
