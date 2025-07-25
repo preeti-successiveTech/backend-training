@@ -22,6 +22,9 @@ import parameterRequest from "./router/parameterRequest";
 
 import dotenv from "dotenv";
 
+import { connectDB } from './config/db';
+import userRoutes from './router/userRoute';
+
 dotenv.config();
 
 const app = express();
@@ -39,7 +42,7 @@ const healthCheckController = new HealthCheckController();
 
 app.use(express.json());
 
-app.use(simpleRateLimiter.handle());
+app.use("/RateLimiter",simpleRateLimiter.handle());
 app.use(addCustomHeader.handle());
 app.use(requestLogger.handle());
 
@@ -56,6 +59,10 @@ app.use("/api/test-errors", testError);
 app.use("/api/asyncError", asyncErrorRoute);
 app.use("/parameter", parameterRequest);
 app.use("/", healthCheckController.router);
+
+connectDB().catch(console.error);
+
+app.use('/databaseApi', userRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello Port is working");
