@@ -15,8 +15,8 @@ class CountrySeeder {
         try {
             await mongoose_1.default.connect(this.dbUri);
             console.log("MongoDB connected");
-            // await Country.deleteMany({});
-            // console.log("Old countries removed");
+            await Country_1.Country.deleteMany({});
+            console.log("Old countries removed");
             await Country_1.Country.insertMany(counteries_1.COUNTRIES);
             console.log("New countries inserted");
         }
