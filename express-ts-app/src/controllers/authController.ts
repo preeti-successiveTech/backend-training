@@ -1,4 +1,3 @@
-// src/controllers/auth.controller.ts
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import  User1,{ IUser } from '../models/userModel';
