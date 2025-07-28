@@ -19,11 +19,12 @@ import userLocationRoute from "./router/userLocationRoute";
 import testError from "./router/testError";
 import asyncErrorRoute from "./router/asyncRoute";
 import parameterRequest from "./router/parameterRequest";
-
+import authRoute from "./router/authRoute";
 import dotenv from "dotenv";
 
 import { connectDB } from './config/db';
 import userRoutes from './router/userRoute';
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ const simpleRateLimiter = new SimpleRateLimiter(5);
 const healthCheckController = new HealthCheckController();
 
 app.use(express.json());
+mongoose.connect(process.env.MONGO_URI!);
 
 app.use("/RateLimiter",simpleRateLimiter.handle());
 app.use(addCustomHeader.handle());
@@ -59,10 +61,15 @@ app.use("/api/test-errors", testError);
 app.use("/api/asyncError", asyncErrorRoute);
 app.use("/parameter", parameterRequest);
 app.use("/", healthCheckController.router);
+app.use('/api/auth', authRoute);
 
 connectDB().catch(console.error);
 
 app.use('/databaseApi', userRoutes);
+
+if (!process.env.JWT_SECRET) {
+  throw new Error('Missing JWT_SECRET in environment');
+}
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello Port is working");

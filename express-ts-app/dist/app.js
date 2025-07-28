@@ -22,9 +22,11 @@ const userLocationRoute_1 = __importDefault(require("./router/userLocationRoute"
 const testError_1 = __importDefault(require("./router/testError"));
 const asyncRoute_1 = __importDefault(require("./router/asyncRoute"));
 const parameterRequest_1 = __importDefault(require("./router/parameterRequest"));
+const authRoute_1 = __importDefault(require("./router/authRoute"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const db_1 = require("./config/db");
 const userRoute_1 = __importDefault(require("./router/userRoute"));
+const mongoose_1 = __importDefault(require("mongoose"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = 3000;
@@ -35,6 +37,7 @@ const multiMiddleware = new MultiMiddleware_1.MultiMiddleware();
 const simpleRateLimiter = new SimpleRateLimiter_1.SimpleRateLimiter(5);
 const healthCheckController = new HealthCheckController_1.HealthCheckController();
 app.use(express_1.default.json());
+mongoose_1.default.connect(process.env.MONGO_URI);
 app.use("/RateLimiter", simpleRateLimiter.handle());
 app.use(addCustomHeader.handle());
 app.use(requestLogger.handle());
@@ -51,6 +54,7 @@ app.use("/api/test-errors", testError_1.default);
 app.use("/api/asyncError", asyncRoute_1.default);
 app.use("/parameter", parameterRequest_1.default);
 app.use("/", healthCheckController.router);
+app.use('/api/auth', authRoute_1.default);
 (0, db_1.connectDB)().catch(console.error);
 app.use('/databaseApi', userRoute_1.default);
 app.get("/", (req, res) => {
