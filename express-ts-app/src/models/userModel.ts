@@ -1,4 +1,3 @@
-// src/models/user.model.ts
 import mongoose, { Document, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
@@ -6,6 +5,7 @@ export interface IUser extends Document {
   username: string;
   email: string;
   password: string;
+  role : string;
   comparePassword(candidate: string): Promise<boolean>;
 }
 
@@ -14,6 +14,7 @@ const UserSchema = new Schema<IUser>(
     username: { type: String, required: true, minlength: 5, maxlength: 60 },
     email: { type: String, required: true, unique: true, match: [/.+@.+\..+/, 'Invalid email'] },
     password: { type: String, required: true, minlength: 5, maxlength: 100 },
+    role : {type:String, required: true,  enum: ['admin', 'user', 'moderator'], default: 'user' }
   },
   { timestamps: true }
 );
