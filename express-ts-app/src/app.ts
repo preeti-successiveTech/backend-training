@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import { users } from "./utils/Mockdata";
-
+import helmet from "helmet";
 import { AddCustomHeaderMiddleware } from "./middleware/AddCustomHeaderMiddleware";
 import { RequestLoggerMiddleware } from "./middleware/RequestLoggerMiddleware";
 import { ErrorHandlerMiddleware } from "./middleware/ErrorHandlerMiddleware";
@@ -25,6 +25,7 @@ import dotenv from "dotenv";
 import { connectDB } from './config/db';
 import userRoutes from './router/userRoute';
 import mongoose from "mongoose";
+import { SecurityHeader } from "./middleware/SecurityHeader";
 
 dotenv.config();
 
@@ -44,9 +45,14 @@ const healthCheckController = new HealthCheckController();
 app.use(express.json());
 mongoose.connect(process.env.MONGO_URI!);
 
+app.use(helmet);
+
 app.use("/RateLimiter",simpleRateLimiter.handle());
 app.use(addCustomHeader.handle());
 app.use(requestLogger.handle());
+
+app.use(SecurityHeader.headerProtection)
+
 
 // Routes
 app.use("/mockUsers", mockUserRoutes);
