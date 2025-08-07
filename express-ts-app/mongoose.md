@@ -51,12 +51,12 @@ Mongoose is a powerful ODM (Object Document Mapper) for Node.js that simplifies 
 
 ## RDBMS vs NoSQL (MongoDB)
 
-| Feature           | RDBMS (e.g., MySQL)               | NoSQL (e.g., MongoDB)                     |
-|-------------------|----------------------------------|------------------------------------------|
-| Data Model        | Table - Row - Column             | JSON-like Documents (BSON)                |
-| Schema            | Fixed schema                    | Dynamic / Flexible Schema                  |
-| Scalability       | Vertical (Scale-Up)              | Horizontal (Scale-Out via Sharding)       |
-| Relationships     | Strong ACID Transactions & JOINs| Weak JOIN support, Embedded documents     |
-| Query Language    | SQL (Structured Query Language) | MongoDB Query Language (MQL)               |
-| Use Cases         | Banking, ERP, Traditional Apps  | Real-time analytics, Social apps           |
-| Speed             | Fast for structured data        | Fast for large, unstructured data          |
+| Feature        | RDBMS (e.g., MySQL)              | NoSQL (e.g., MongoDB)                 |
+| -------------- | -------------------------------- | ------------------------------------- |
+| Data Model     | Table - Row - Column             | JSON-like Documents (BSON)            |
+| Schema         | Fixed schema                     | Dynamic / Flexible Schema             |
+| Scalability    | Vertical (Scale-Up)              | Horizontal (Scale-Out via Sharding)   |
+| Relationships  | Strong ACID Transactions & JOINs | Weak JOIN support, Embedded documents |
+| Query Language | SQL (Structured Query Language)  | MongoDB Query Language (MQL)          |
+| Use Cases      | Banking, ERP, Traditional Apps   | Real-time analytics, Social apps      |
+| Speed          | Fast for structured data         | Fast for large, unstructured data     |
