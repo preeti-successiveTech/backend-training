@@ -1,4 +1,3 @@
-
 # MongoDB Indexes Notes
 
 ## What is an Index?
@@ -26,9 +25,9 @@ It helps MongoDB find data faster without checking every record one by one.
 2. **Compound Index**  
    Index on two or more fields, like `status` and `orderDate`.
 
-3. **Multiple Index**   
-Automatically created when indexing fields that contain arrays.   
-example - db.collection.createIndex({ items: 1 })  //items:{product, name, id}
+3. **Multiple Index**  
+   Automatically created when indexing fields that contain arrays.  
+   example - db.collection.createIndex({ items: 1 }) //items:{product, name, id}
 
 4. **Text Index**  
    Special index to search words inside text fields.
@@ -36,21 +35,18 @@ example - db.collection.createIndex({ items: 1 })  //items:{product, name, id}
 ## How to Work with Indexes
 
 - **See all indexes on your collection:**  
- db.orders.getIndexes();
+  db.orders.getIndexes();
 
 - **Create an index on one field**  
-db.orders.createIndex({ customerName: 1 })
+  db.orders.createIndex({ customerName: 1 })
 
 - **Create index on multiple field**  
- db.orders.createIndex({ status: 1, orderDate: -1 })   // -1 means desc order
+  db.orders.createIndex({ status: 1, orderDate: -1 }) // -1 means desc order
 
- - **Create a text index for searching words**  
- db.create.createIndex({productName : {text}})
+- **Create a text index for searching words**  
+  db.create.createIndex({productName : {text}})
 
-
-
-
- # Some key points
+# Some key points
 
 - Indexes make searches and sorting much faster.
 
@@ -60,4 +56,4 @@ db.orders.createIndex({ customerName: 1 })
 
 - Removing unused indexes helps write data faster and saves space.
 
-- Always test query speed before and after adding indexes. 
+- Always test query speed before and after adding indexes.
