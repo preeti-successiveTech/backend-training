@@ -6,6 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node dist/app.js",
+      "seed": "ts-node src/scripts/mockOrders.ts",
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "dev:nodemon": "nodemon --watch dist dist/app.js",
     "dev:nodemon:ts": "nodemon --watch src --ext ts --exec ts-node src/app.ts"
@@ -15,6 +16,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@faker-js/faker": "^8.0.0",
     "@types/geoip-lite": "^1.4.4",
     "bcryptjs": "^3.0.2",
     "dotenv": "^17.2.0",
